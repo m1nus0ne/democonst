@@ -14,6 +14,4 @@ pic=listdir()[0]
 
 
 im=Image.open(pic)
-im.
-
 
