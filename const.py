@@ -32,18 +32,20 @@ width = im.size[1]
 # Вкладываем основную пикчу в рамку, рамку+пикчу на демотиватор с надписью
 
 background = Image.new('RGB', (height + BORDER, width + BORDER), (0, 0, 0)) # TODO: здесь
+
 draw = ImageDraw.Draw(background)
 draw.rectangle((0, 0, height + BORDER, width + BORDER), None, WHITE, LINE_SIZE)
-background.paste(im, (int(0.5 * BORDER), int(BORDER * 0.5))) # TODO: и здесь заменить BORDER через LINE_SIZE
+background.paste(im, rround(0.5 * BORDER, BORDER * 0.5)) # TODO: и здесь заменить BORDER через LINE_SIZE
 
 result_image = Image.new('RGB', (height + 2 * IMAGE_OFFSET_X, width + IMAGE_OFFSET_Y + TEXT_OFFSET))
-# На самом деле TEXT_OFFSET должено быть переменной /m1nus0ne Подергал ползунки на сайте, там все по консту
+# На самом деле TEXT_OFFSET должено быть переменной
 result_image.paste(background, (IMAGE_OFFSET_X, IMAGE_OFFSET_Y))
 result_image.show()
-#Добавляем текст по классике: ЗАГОЛОВОК текст, маштабируем поле ввода
-#TODO: Сказывается ли отсутствие одного текста на расположеие другого?
-HEAD =
-head_image = Image.new()
+#Добавляем текст по классике: ЗАГОЛОВОК текст, маштабируем поле ввода вниз, ширина по консту
+#!!!!!16pt == 9pic
+
+
+
 
 
 
