@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 from os import listdir, chdir
 from sys import exit
 from time import sleep
-from democonst.CONFIG import *   # TODO: Блять у тебя справка с дурки есть? Шпак помоги
+from CONFIG import *   # Ты шизоид?
 
 
 
@@ -26,6 +26,7 @@ im: Image.Image = Image.open(pic)
 P.S. с Image.new() такого не происходит
 /m1nus0ne: Напоминает ожидаемый тип ввода в функциях
 P.S. Это рыготня опять не видит CONFIG.py
+/Мамин поц: видит
 """
 height = im.size[0]
 width = im.size[1]

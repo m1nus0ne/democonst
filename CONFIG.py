@@ -11,4 +11,4 @@ PLAIN_SIZE = ImageFont.truetype('font.ttf',encoding='unic',size=28)
 
 # COLORS
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
+BLACK = (0, 0, 0) # LIVES MATTER
