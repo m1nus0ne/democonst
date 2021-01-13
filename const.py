@@ -8,7 +8,31 @@ from textwrap import wrap
 # Часто работаем с кортежами, пишем нужную функцию округления
 def rround(*args):
 	return tuple(map(round, args))
-def 
+def textprint(text,y_cord: int,font:ImageFont):
+	'''В блядском PIL нет функции ввода в область, пишем ее сами
+		Выравнивание по центру'''
+	if font.size == 40:
+		text = wrap(text,HEAD_LIMIT)
+		for line in text:
+			x_cord = (result_image.width-len(line)*24)/2
+			draw = ImageDraw.Draw(result_image)
+			draw.text(rround(x_cord,y_cord),line, WHITE, HEAD_FONT)
+
+			y_cord+=HEAD_SHIFT*1.5
+	else:
+		text = wrap(text,PLAIN_LIMIT)
+		for line in text:
+			draw = ImageDraw.Draw()
+			draw.text(cord,line,WHITE,PLAIN_FONT)
+			cord = rround(cord[0], cord[1] + 10 * PLAIN_SHIFT)
+
+
+
+
+
+
+
+
 
 # Подсос избражения
 chdir('pic')
@@ -18,7 +42,7 @@ if len(listdir()) != 1:
 	exit()
 pic = listdir()[0]
 
-im: Image.Image = Image.open(pic)
+im = Image.open(pic)
 """
 Пояснение: автозаполнение в pycharm работает нормально, но по какой-то причине объект, создаваемый ф-цией Image.open(),
 не воспринимается как объект класса Image.Image и если использовать синтаксис как показвно выше, то pycharm будет нормально с ним работать
@@ -31,22 +55,22 @@ height = im.height
 width = im.width
 # Вкладываем основную пикчу в рамку, рамку+пикчу на демотиватор с надписью
 
-background = Image.new('RGB', (width + BORDER, height + BORDER), (0, 0, 0))  # TODO: здесь
+background = Image.new('RGB', (width + BORDER, height + BORDER), (0, 0, 0))
 
 draw = ImageDraw.Draw(background)
 draw.rectangle((0, 0, width + BORDER, height + BORDER), None, WHITE, LINE_SIZE)
-background.paste(im, rround(0.5 * BORDER, BORDER * 0.5))  # TODO: и здесь заменить BORDER через LINE_SIZE
+background.paste(im, rround(0.5 * BORDER, BORDER * 0.5))
 
-result_image = Image.new('RGB', (width + 2 * IMAGE_OFFSET_X, height + IMAGE_OFFSET_Y + TEXT_OFFSET))
+result_image = Image.new('RGB', (background.width + 2 * IMAGE_OFFSET_X, background.height + IMAGE_OFFSET_Y + TEXT_OFFSET))
 # На самом деле TEXT_OFFSET должено быть переменной
 result_image.paste(background, (IMAGE_OFFSET_X, IMAGE_OFFSET_Y))
-HEAD_LIMIT =(result_image.width - IMAGE_OFFSET_X)//24
-PLAIN_LIMIT = (result_image.width - IMAGE_OFFSET_X)//17
+HEAD_LIMIT =(background.width - IMAGE_OFFSET_X)//24
+PLAIN_LIMIT = (background.width - IMAGE_OFFSET_X)//17
 
 # Добавляем текст по классике: ЗАГОЛОВОК текст, маштабируем поле ввода вниз, ширина по консту
-# !!!!!16pt == 9pic
+# Отцентровка расчитываеться отдельно
 draw = ImageDraw.Draw(result_image)
-draw.text((IMAGE_OFFSET_X, height+IMAGE_OFFSET_Y*2), 'NIGGERS '*10, font=PLAIN_FONT,fill=WHITE,align='m')
+textprint('NIGGERS '* 10,background.height+IMAGE_OFFSET_Y,HEAD_FONT)
 result_image.show()
 print((width, width))
 print(result_image.size)
