@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from os import listdir, chdir
 from sys import exit
 from time import sleep
@@ -17,7 +17,7 @@ def rround(*args):
 	return tuple(map(round, args))
 
 def textprint(text,y_cord: int,font:ImageFont):
-	'''В блядском PIL нет функции ввода в область, пишем ее сами
+	'''В (уважаемом) PIL нет функции ввода в область, пишем ее сами
 		Выравнивание по центру'''
 	global Y_PLAIN
 	if font.size == 40:
@@ -66,22 +66,21 @@ width = im.width
 
 background = Image.new('RGB', (width + BORDER, height + BORDER), (0, 0, 0))
 
+HEAD_LIMIT =(background.width - IMAGE_OFFSET_X)//24
+PLAIN_LIMIT = (background.width - IMAGE_OFFSET_X)//17
+
 draw = ImageDraw.Draw(background)
 draw.rectangle((0, 0, width + BORDER, height + BORDER), None, WHITE, LINE_SIZE)
 background.paste(im, rround(0.5 * BORDER, BORDER * 0.5))
-
-result_image = Image.new('RGB', (background.width + 2 * IMAGE_OFFSET_X, background.height + IMAGE_OFFSET_Y + TEXT_OFFSET))
+TEXT_OFFSET = int(len(wrap(HEAD_TEXT,HEAD_LIMIT))*HEAD_SHIFT*1.5 + len(wrap(PLAIN_TEXT,PLAIN_LIMIT))*PLAIN_SHIFT*1.5)
+result_image = Image.new('RGB', (background.width + 2 * IMAGE_OFFSET_X, background.height + 2*IMAGE_OFFSET_Y + TEXT_OFFSET+INDENTS_OFFSET*2))
 # На самом деле TEXT_OFFSET должено быть переменной
 result_image.paste(background, (IMAGE_OFFSET_X, IMAGE_OFFSET_Y))
-HEAD_LIMIT =(background.width - IMAGE_OFFSET_X)//24
-PLAIN_LIMIT = (background.width - IMAGE_OFFSET_X)//17
+
 
 # Добавляем текст по классике: ЗАГОЛОВОК текст, маштабируем поле ввода вниз, ширина по консту
 # Отцентровка расчитываеться отдельно
 draw = ImageDraw.Draw(result_image)
-textprint(HEAD_TEXT,background.height+IMAGE_OFFSET_Y,HEAD_FONT)
-textprint(PLAIN_TEXT,Y_PLAIN,PLAIN_FONT)
+textprint(HEAD_TEXT,background.height+IMAGE_OFFSET_Y+INDENTS_OFFSET,HEAD_FONT)
+textprint(PLAIN_TEXT,Y_PLAIN+INDENTS_OFFSET,PLAIN_FONT)
 result_image.show()
-print((width, width))
-print(result_image.size)
-print(Y_PLAIN)

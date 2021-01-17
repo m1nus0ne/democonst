@@ -10,8 +10,7 @@ HEAD_FONT = ImageFont.truetype('font.ttf', encoding='unic', size=40)  # 24pic ш
 PLAIN_FONT = ImageFont.truetype('font.ttf', encoding='unic', size=28)  # 17pic ширина 20pic  высота
 HEAD_SHIFT = 28
 PLAIN_SHIFT = 20
-TEXT_OFFSET = 300
-Y_PLAIN = 0
+INDENTS_OFFSET = 15
 
 # COLORS
 WHITE = (255, 255, 255)  # POWER
