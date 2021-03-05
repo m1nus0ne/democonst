@@ -45,7 +45,7 @@ def textprint(text, y_cord: int, font: ImageFont):
             draw = ImageDraw.Draw(result_image)
             draw.text(rround(x_cord, y_cord), line, WHITE, PLAIN_FONT)
 
-            y_cord += PLAIN_SHIFT * 1.5
+            y_cord += PLAIN_HEIGHT * 1.5
 
 
 
@@ -82,7 +82,7 @@ for i in range(N):
 
 
     TEXT_OFFSET = int(
-        len(wrap(HEAD_TEXT, HEAD_LIMIT)) * HEAD_SHIFT * 1.5 + len(wrap(PLAIN_TEXT, PLAIN_LIMIT)) * PLAIN_SHIFT * 1.5)
+        len(wrap(HEAD_TEXT, HEAD_LIMIT)) * HEAD_HEIGHT * 1.5 + len(wrap(PLAIN_TEXT, PLAIN_LIMIT)) * PLAIN_HEIGHT * 1.5)
     result_image = Image.new('RGB', (
     background.width + 2 * IMAGE_OFFSET_X, background.height + 2 * IMAGE_OFFSET_Y + TEXT_OFFSET + INDENTS_OFFSET * 2))
     result_image.paste(background, (IMAGE_OFFSET_X, IMAGE_OFFSET_Y))
@@ -93,7 +93,7 @@ for i in range(N):
     # Отцентровка расчитываеться отдельно
     draw = ImageDraw.Draw(result_image)
     textprint(HEAD_TEXT, background.height + IMAGE_OFFSET_Y + INDENTS_OFFSET, HEAD_FONT)
-    Y_PLAIN = background.height + IMAGE_OFFSET_Y + INDENTS_OFFSET + len(wrap(HEAD_TEXT, HEAD_LIMIT))*HEAD_SHIFT*1.5
+    Y_PLAIN = background.height + IMAGE_OFFSET_Y + INDENTS_OFFSET + len(wrap(HEAD_TEXT, HEAD_LIMIT))*HEAD_HEIGHT*1.5
     textprint(PLAIN_TEXT, Y_PLAIN + INDENTS_OFFSET, PLAIN_FONT)
     result_image.thumbnail(im.size)
     im = result_image
