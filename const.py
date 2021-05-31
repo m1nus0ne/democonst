@@ -72,5 +72,5 @@ for i in range(N):
     result_image.thumbnail(im.size)
     im = result_image
 im = Image.open(pic)
-result_image.thumbnail(im.size) #Сжимаем под сходный размер
+result_image.thumbnail(im.size) #Сжимаем под исходный размер
 
